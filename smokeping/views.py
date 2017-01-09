@@ -4,7 +4,7 @@
 
 from django.http import HttpResponse
 from django.template import Context, loader
-from django.utils import simplejson
+import simplejson
 from smokeping.models import Target
 from smokeping.models import Chart
 from smokeping.models import Alert

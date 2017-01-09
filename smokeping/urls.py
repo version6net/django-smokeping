@@ -1,11 +1,12 @@
-from django.conf.urls import patterns
+from django.conf.urls import url
+from . import views
 
-urlpatterns = patterns('',
-    (r'^targets$', 'smokeping.views.targets'),
-    (r'^alerts$', 'smokeping.views.alerts'),
-    (r'^parents$', 'smokeping.views.parents'),
-    (r'^slaves$', 'smokeping.views.slaves'),
-    (r'^probes$', 'smokeping.views.probes'),
-    (r'^export$', 'smokeping.views.export'),
-    (r'^secrets$', 'smokeping.views.secrets'),
-)
+urlpatterns = [
+    url(r'^targets/$', views.targets),
+    url(r'^alerts/$', views.alerts),
+    url(r'^parents/$', views.parents),
+    url(r'^slaves/$', views.slaves),
+    url(r'^probes/$', views.probes),
+    url(r'^export/$', views.export),
+    url(r'^secrets/$', views.secrets),
+]

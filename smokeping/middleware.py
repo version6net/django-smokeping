@@ -19,13 +19,20 @@ class StripWhitespaceMiddleware(object):
     Strips leading and trailing whitespace from response content.
     """
 
-    def __init__(self):
+    def __init__(self, get_response):
+        self.get_response = get_response
         self.whitespace = re.compile('^\s*\n', re.MULTILINE)
         # self.whitespace_lead = re.compile('^\s+', re.MULTILINE)
         # self.whitespace_trail = re.compile('\s+$', re.MULTILINE)
 
 
-    def process_response(self, request, response):
+    def __call__(self, request):
+        response = self.get_response(request)
+        # FIXME
+        # File "/usr/local/lib/python3.6/site-packages/smokeping/middleware.py", line 38, in __call__
+        #  response.content = self.whitespace.sub(', response.content)
+        # TypeError: cannot use a string pattern on a bytes-like object
+        return response
         if "text" in response['Content-Type']:
             if hasattr(self, 'whitespace_lead'):
                 response.content = self.whitespace_lead.sub('', response.content)
